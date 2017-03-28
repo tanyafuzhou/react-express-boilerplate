@@ -25,5 +25,5 @@ npm run build
 
 - support `hot-loader`
 - support `react-router` 
-- add `webpack.DllReferencePlugin`&`webpack.DllPlugin` to optimizw Webpack build times.
+- add `webpack.DllReferencePlugin`&`webpack.DllPlugin` to optimize Webpack build times.
 - add dir `hoc` which contains high order components , these components are classic cases collected in daily development.
