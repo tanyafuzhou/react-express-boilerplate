@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <% if(htmlWebpackPlugin.options.env === 'prod') { %>
+    <script src="./libs/react.min.js" type="text/javascript"></script>
+    <script src="./libs/react-dom.min.js" type="text/javascript"></script>
+    <script src="./libs/ReactRouter.min.js" type="text/javascript"></script>
+    <% } else {%>
+    <script src="./libs/vendor.js" type="text/javascript"></script>
+    <% } %>
+  </body>
+</html>
