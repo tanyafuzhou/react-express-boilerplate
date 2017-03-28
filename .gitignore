@@ -1,5 +1,5 @@
 dist
-build
+/build
 lib-cov
 coverage.html
 /coverage
