@@ -5,7 +5,7 @@ import Counter from './pages/Counter'
 import Layout from './Layout'
 function App () {
   return (
-    <Router history={hashHistory} key={Math.random()} >
+    <Router history={hashHistory} >
       <Route path="/" component={Layout}>
         <IndexRoute component={Home} />
         <Route path="counter" component={Counter} />

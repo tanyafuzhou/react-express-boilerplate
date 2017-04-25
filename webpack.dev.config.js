@@ -7,7 +7,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
   entry: {
     index: [
-      'react-hot-loader/patch',
       './src/index.js',
       'webpack-hot-middleware/client?path=http://localhost/__webpack_hmr'
     ]
@@ -16,7 +15,7 @@ module.exports = {
     path: path.join(__dirname, 'build'),
     filename: '[name].js',
     chunkFilename: 'chunk/[name].js',
-    publicPath: './'
+    publicPath: 'http://localhost/'
   },
 
   devtool: 'source-map',
@@ -28,15 +27,10 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     // prints more readable module names in the browser console on HMR updates
 
-    new webpack.DllReferencePlugin({
-      context: __dirname,
-      manifest: require('./manifest.json')
-    }),
     new HtmlWebpackPlugin({
       title: 'react-express-boilerplate',
       template: 'index.ejs'
     })
-
   ],
   resolve: {
     alias: {
@@ -44,17 +38,20 @@ module.exports = {
     },
     root: path.resolve('src'),
     modulesDirectories: ['node_modules'],
-    extensions: ['', '.js']
+
+    extensions: ['', '.ts', '.tsx', '.js']
   },
   module: {
-    loaders: [{
-      test: /\.jsx?$/,
-      loader: 'babel-loader',
-      query: {
-          presets: ['react', 'es2015'],
-          plugins: ['transform-object-rest-spread', 'react-hot-loader/babel']
+    loaders: [
+      {
+        test: /\.jsx?$/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['react', 'es2015', 'react-hmre'],
+          plugins: ['transform-object-rest-spread']
         }
       },
+      { test: /\.tsx?$/, loader: 'babel-loader!ts-loader' },
       {
         test: /\.(css|less)$/,
         loader: 'style-loader!css-loader!postcss-loader!less-loader'
@@ -67,5 +64,20 @@ module.exports = {
   },
   postcss: function () {
     return [autoprefixer({ browsers: ['> 1%', 'IE 9'] }), precss]
+  },
+  ts: {
+    transpileOnly: true,
+    declaration: false,
+    compilerOptions: {
+      baseUrl: '.',
+      paths: {
+        '_/*': ['./src/*']
+      },
+      target: 'es6',
+      jsx: 'preserve',
+      moduleResolution: 'node',
+      sourceMap: true
+    },
+    files: ['i-really-hope-you-dont-have-a-file-with-this-name']
   }
 }

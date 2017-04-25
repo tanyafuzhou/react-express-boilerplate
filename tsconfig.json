@@ -1,0 +1,15 @@
+{
+    "transpileOnly": true,
+    "declaration": false,
+    "compilerOptions": { 
+      "baseUrl" : ".",
+      "paths": {
+        "_/*": ["./src/*"]
+      },
+      "target": "es6",
+      "jsx": "preserve",
+      "moduleResolution": "node",
+      "sourceMap": true
+    },
+    "files": ["i-really-hope-you-dont-have-a-file-with-this-name"]
+}

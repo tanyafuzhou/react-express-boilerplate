@@ -21,9 +21,24 @@ app.get('/index.html', function (req, res) {
   res.sendFile(path.join(__dirname, './index.html'))
 })
 
-app.get('/libs/vendor.js', function (req, res) {
-  res.sendFile(path.join(__dirname, './libs/vendor.js'))
-})
+app.get(
+  '/libs/react.min.js',
+  function (req, res) {
+    res.sendFile(path.join(__dirname, 'libs/react-with-addons.js'))
+  }
+)
+app.get(
+  '/libs/react-dom.min.js',
+  function (req, res) {
+    res.sendFile(path.join(__dirname, 'libs/react-dom.js'))
+  }
+)
+app.get(
+  '/libs/ReactRouter.min.js',
+  function (req, res) {
+    res.sendFile(path.join(__dirname, 'libs/ReactRouter.js'))
+  }
+)
 
 function getUserHomeDir () {
   return process.env.HOME || process.env.USERPROFILE
@@ -43,13 +58,13 @@ const startHttps = () => {
     const gid = parseInt(env['SUDO_GID'] || process.getgid(), 10)
     process.setgid(gid)
     process.setuid(uid)
-    console.log('443 is start up')
+    console.log('port 443 is open')
   })
 }
 
 const start = () => {
   httpServ.listen(80, function () {
-    console.log('80 is start up')
+    console.log('port 80 is open')
     startHttps()
   })
 }
